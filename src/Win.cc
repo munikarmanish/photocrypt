@@ -390,9 +390,9 @@ void Win::steg()
     d.add_button(Stock::SAVE, RESPONSE_OK);
 
     auto filterImage = Gtk::FileFilter::create();
-    filterImage->set_name("Images files");
-    filterImage->add_mime_type("images/bmp");
-    filterImage->add_mime_type("images/png");
+    filterImage->set_name("Bitmap image files");
+    filterImage->add_mime_type("image/bmp");
+    filterImage->add_mime_type("image/png");
     d.add_filter(filterImage);
 
     if (d.run() == RESPONSE_OK) {
