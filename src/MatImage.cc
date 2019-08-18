@@ -27,7 +27,7 @@ namespace Photocrypt
 MatImage::MatImage(const string& filename)
 {
     // Load the image from the given filename
-    mMat = imread(filename, CV_LOAD_IMAGE_COLOR);
+    mMat = imread(filename, IMREAD_COLOR);
 
     // If something goes wrong
     if (not mMat.data)
@@ -37,7 +37,7 @@ MatImage::MatImage(const string& filename)
     //
     // This is required because OpenCV loads image as BGR and gtk requires
     // the image in RGB to display correctly.
-    cvtColor(mMat, mMat, CV_BGR2RGB);
+    cvtColor(mMat, mMat, COLOR_BGR2RGB);
 }
 
 // Create from Pixbuf
@@ -82,7 +82,7 @@ void MatImage::save(const string& filename) const
 {
     // Convert the Mat from RGB to BGR before saving
     Mat bgr;
-    cvtColor(mMat, bgr, CV_RGB2BGR);
+    cvtColor(mMat, bgr, COLOR_RGB2BGR);
 
     imwrite(filename, bgr);
 }
@@ -188,7 +188,7 @@ RefPtr<Pixbuf> MatImage::fit(int width, int height) const
 void  MatImage::show(int msecs) const
 {
     // Create a window
-    namedWindow("MatImage", CV_WINDOW_NORMAL);
+    namedWindow("MatImage", WINDOW_AUTOSIZE);
 
     // Display the image in that window
     imshow("MatImage", mMat);

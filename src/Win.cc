@@ -35,7 +35,8 @@ Win::Win() :
 {
     // Set window parameters
     set_title(PROGRAM_TITLE);
-    set_default_icon_from_file("/opt/photocrypt/icon.png");
+    auto appIcon = Gdk::Pixbuf::create_from_xpm_data(icon);
+    set_default_icon(appIcon);
 
     add(mVBoxMain);
 
@@ -258,11 +259,11 @@ void Win::onOpenImage()
     d.add_button(Stock::OPEN, RESPONSE_OK);
 
     // Add filter to select only images
-    FileFilter filterImage;
-    filterImage.set_name("Image files");
-    filterImage.add_mime_type("image/bmp");
-    filterImage.add_mime_type("image/png");
-    filterImage.add_mime_type("image/jpeg");
+    auto filterImage = Gtk::FileFilter::create();
+    filterImage->set_name("Image files");
+    filterImage->add_mime_type("image/bmp");
+    filterImage->add_mime_type("image/png");
+    filterImage->add_mime_type("image/jpeg");
     d.add_filter(filterImage);
 
     if (d.run() == RESPONSE_OK)
@@ -292,9 +293,9 @@ void Win::onOpenText()
     d.add_button(Stock::OPEN, RESPONSE_OK);
 
     // Add filter to select text files only
-    FileFilter filterText;
-    filterText.set_name("ASCII Text Files");
-    filterText.add_mime_type("text/plain");
+    auto filterText = Gtk::FileFilter::create();
+    filterText->set_name("Text files");
+    filterText->add_mime_type("text/plain");
     d.add_filter(filterText);
 
     if (d.run() == RESPONSE_OK)
@@ -388,14 +389,14 @@ void Win::steg()
     d.add_button(Stock::CANCEL, RESPONSE_CANCEL);
     d.add_button(Stock::SAVE, RESPONSE_OK);
 
-    FileFilter filterImage;
-    filterImage.set_name("BMP or PNG Images");
-    filterImage.add_mime_type("image/bmp");
-    filterImage.add_mime_type("image/png");
+    auto filterImage = Gtk::FileFilter::create();
+    filterImage->set_name("Images files");
+    filterImage->add_mime_type("images/bmp");
+    filterImage->add_mime_type("images/png");
     d.add_filter(filterImage);
 
     if (d.run() == RESPONSE_OK) {
-        mMatImage.save(d.get_filename().raw());
+        mMatImage.save(d.get_filename());
         display_error("Successfully saved");
         mrTextBuffer->set_text("");
         mEntryKey.set_text("");
@@ -409,7 +410,7 @@ void Win::unsteg()
 
     // Try to unsteg the text
     try {
-        text = mMatImage.unsteg(mEntryKey.get_text().raw());
+        text = mMatImage.unsteg(mEntryKey.get_text());
     } catch (ImageEmptyError) {
         display_error("Select an image first.");
         return;
@@ -445,13 +446,13 @@ void Win::save()
     d.add_button(Stock::CANCEL, RESPONSE_CANCEL);
     d.add_button(Stock::SAVE, RESPONSE_OK);
 
-    FileFilter filter;
-    filter.set_name("ASCII Text Files");
-    filter.add_mime_type("text/plain");
+    auto filter = Gtk::FileFilter::create();
+    filter->set_name("Text files");
+    filter->add_mime_type("text/plain");
     d.add_filter(filter);
 
     if (d.run() == RESPONSE_OK) {
-        string filename = d.get_filename().raw();
+        string filename = d.get_filename();
         TextFile t = (mrTextBuffer -> get_text()).raw();
         t.save(filename);
 

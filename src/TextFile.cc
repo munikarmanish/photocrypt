@@ -24,9 +24,8 @@ TextFile TextFile::open(const string& filename)
     ifstream file(filename.c_str());
 
     string line;
-    getline(file, t.mText);
     while (getline(file, line))
-        t.mText += "\n" + line;
+        t.mText += line + '\n';
 
     return t;
 }

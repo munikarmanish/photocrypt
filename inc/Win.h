@@ -9,6 +9,7 @@
 #include <gtkmm.h>
 #include "MatImage.h"
 #include "TextFile.h"
+#include "icon.xpm"
 
 /**
  *  This class represents our main window

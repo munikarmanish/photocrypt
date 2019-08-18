@@ -36,9 +36,11 @@ It depends on following packages only to build. Built package is independent.
 | [GNU gcc][gcc] with C++11  | To compile the sources            |
 | [GNU make][make]           | To build                          |
 | [pkg-config][pkg-config]   | To get compiler and linker flags  |
-| [OpenCV][opencv] 2 library | For image processing              |
-| [gtkmm][gtkmm] 2 library   | For GUI                           |
+| [OpenCV][opencv] 4 library | For image processing              |
+| [gtkmm][gtkmm] 3 library   | For GUI                           |
 | [OpenSSL][openssl] library | For security                      |
+| HDF5                       |                                   |
+| VTK                        |                                   |
 
 
 
@@ -49,7 +51,7 @@ It depends on following packages only to build. Built package is independent.
 [Photocrypt][aur-photocrypt] is available for [Arch Linux][archlinux]
 via [AUR][aur]:
 
-    yaourt photocrypt-git
+    yay -S photocrypt-git
 
 ### Manual installation
 
@@ -80,11 +82,6 @@ Similarly, to decrypt the text hidden in `stego.png`:
 
 For more info, see `steg -h` and `unsteg -h`.
 
-## Authors
-
-* Manish Munikar, `070-BCT-520`
-* Dipesh Pandey, `070-BCT-514`
-* Brihat Ratna Bajracharya, `070-BCT-513`
 
 [wiki-steganography]: http://en.wikipedia.org/wiki/Steganography
 [gtkmm]:              http://gtkmm.org

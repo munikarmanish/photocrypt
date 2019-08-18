@@ -13,7 +13,7 @@ DESTDIR   :=
 SOURCES   := MatImage.cc TextFile.cc util.cc Error.cc
 OBJECTS   := $(SOURCES:%.cc=$(ODIR)/%.o)
 
-LIBRARIES := gtkmm-2.4 opencv openssl
+LIBRARIES := gtkmm-3.0 opencv4 openssl
 CC        := g++
 CFLAGS    := -O `pkg-config --cflags $(LIBRARIES)` -I $(HDIR) -std=c++11
 LFLAGS    := -O `pkg-config --libs $(LIBRARIES)` -std=c++11
@@ -62,7 +62,7 @@ install: uninstall all
 	@echo ":: Installing"
 	@mkdir -p "$(DESTDIR)/opt/photocrypt"
 	@mkdir -p "$(DESTDIR)/usr/bin"
-	@cp photocrypt steg unsteg README.md icon.png $(DESTDIR)/opt/photocrypt/
+	@cp photocrypt steg unsteg $(DESTDIR)/opt/photocrypt/
 	@ln -s /opt/photocrypt/photocrypt $(DESTDIR)/usr/bin/photocrypt
 	@ln -s /opt/photocrypt/steg       $(DESTDIR)/usr/bin/steg
 	@ln -s /opt/photocrypt/unsteg     $(DESTDIR)/usr/bin/unsteg
@@ -92,4 +92,3 @@ help:
 	@echo "   make uninstall  : uninstalls the program from the system"
 	@echo "   make doc        : generates documentation in html"
 	@echo "   make help       : displays this help text"
-
